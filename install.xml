@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>Google Tag</name>
+    <code>google-tag</code>
+    <version>1.0.0</version>
+    <author>David Galet</author>
+    <link>www.davidev.it</link>
+    <file path="catalog/view/theme/*/product/product.twig">
+        <operation>
+            <search index="0"><![CDATA[{{ footer }}]]></search>
+            <add position="after"><![CDATA[
+<script>
+    $(document).ready(function() {
+        /**
+         * ON CLICK ADD TO CART GOOGLE TAG
+         */
+        $('#button-cart').on('click', function(e) {
+            dataLayer.push({
+                'event': 'add_to_cart',
+                'ecommerce': {
+                    'items': [{
+                        'item_id': $('input[name=\'product_id\']').val(),
+                        'quantity': $('input[name=\'quantity\']').val()
+                    }]
+                }
+            });
+        });
+    });
+</script>
+            ]]></add>
+        </operation>
+    </file>
+</modification>
